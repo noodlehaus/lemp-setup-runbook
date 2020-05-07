@@ -110,6 +110,8 @@ apt install composer
 
 ### Configure NGINX
 
+[Example NGINX site configuration](./nginx/sites-available/example)
+
 We are going to use the default configuration of nginx, to minimize setup. This
 means we will keep the document root, along with the default configuration.
 
@@ -137,9 +139,47 @@ location ~ \.php$ {
 
 Pending.
 
-### Gearman Workers and Systemd
+### Gearman Workers via Systemd
 
-Pending.
+[Example service configuration](./systemd/your-worker.service)
+
+Create your user systemd files path.
+
+```
+mkdir -p ~/.config/systemd/user
+```
+
+Use the following template for your worker unit.
+
+```
+[Unit]
+Description=Your custom application worker
+Requires=mysql.service
+
+[Service]
+User=www-data
+Group=www-data
+PIDFile=/var/run/your-worker.pid
+ExecStart=/usr/bin/php /var/www/workers/your-worker.php > /dev/null 2>/dev/null
+Type=Simple
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save this file to any of the following path.
+
+```
+/home/<username>/.config/systemd/user/your-worker.service
+```
+
+Enable the service.
+
+```
+systemctl enable your-worker.service
+```
 
 ### References
 
