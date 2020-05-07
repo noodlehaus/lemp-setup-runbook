@@ -1,0 +1,75 @@
+server {
+
+  server_name yourdomain.com;
+  server_tokens off;
+
+  listen [::]:443 ssl ipv6only=on default_server; # managed by Certbot
+  listen 443 ssl default_server; # managed by Certbot
+  ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem; # managed by Certbot
+  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+  client_max_body_size 100M;
+  root /var/www/public;
+
+  # Add index.php to the list if you are using PHP
+  index index.html index.php;
+
+  # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+  location ~ \.php$ {
+    # With php7.0-cgi alone:
+    # fastcgi_pass 127.0.0.1:9000;
+    # With php7.0-fpm:
+    fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+    include snippets/fastcgi-php.conf;
+    fastcgi_connect_timeout 120s;
+    fastcgi_read_timeout 120s;
+    fastcgi_send_timeout 120s;
+  }
+
+  location / {
+    # only serve as file, else 404
+    try_files $uri =404;
+  }
+
+  location = / {
+    return 301 https://yourdomain.com/index.php;
+  }
+
+  location = /index {
+    return 301 https://yourdomain.com/index.php;
+  }
+
+  location = /index.html {
+    return 301 https://yourdomain.com/index.php;
+  }
+
+  location = /favicon.ico {
+    log_not_found off;
+    access_log off;
+  }   
+
+  location = /robots.txt {
+    log_not_found off;
+    access_log off;
+  }   
+
+  location ~ /\.ht {
+    deny all;
+  }
+}
+
+server {
+  server_name yourdomain.com;
+  listen 80 default_server;
+  listen [::]:80 default_server;
+  return 301 https://$host$request_uri;
+}
+
+server {
+  server_name www.yourdomain.com;
+  listen 80;
+  listen [::]:80;
+  return 301 https://$host$request_uri;
+}
