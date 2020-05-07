@@ -2,6 +2,11 @@
 
 Instructions for setting up a basic LEMP stack for application hosting on Ubuntu (LTS 20.04).
 
+### Requirements
+
+- VPS instance (Linode or DO)
+- Registered domain name
+
 ### Initial Setup
 
 Update your distribution packages and install `fail2ban`.
@@ -124,3 +129,8 @@ location ~ \.php$ {
 ### SSL Certificates
 
 Pending.
+
+### References
+
+- https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
+- https://www.linode.com/docs/security/ssl/install-lets-encrypt-to-create-ssl-certificates/
