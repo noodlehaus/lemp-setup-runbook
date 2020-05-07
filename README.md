@@ -137,7 +137,12 @@ location ~ \.php$ {
 
 Pending.
 
+### Gearman Workers and Systemd
+
+Pending.
+
 ### References
 
 - https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers
 - https://www.linode.com/docs/security/ssl/install-lets-encrypt-to-create-ssl-certificates/
+- https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
