@@ -80,9 +80,12 @@ ufw enable
 
 ### Install LEMP packages
 
-Install nginx, php7.4++, mysql, and gearman.
+Install git, nginx, php7.4++, mysql, and gearman.
 
 ```
+# git
+apt install git
+
 # nginx
 apt install nginx
 
@@ -97,8 +100,12 @@ apt install gearman
 apt install php7.4
 apt install php7.4-opcache
 apt install php7.4-mysql
+apt install php7.4-json
 apt install php-imagick
 apt install php-gearman
+
+# composer for php dep management
+apt install composer
 ```
 
 ### Configure NGINX
