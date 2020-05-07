@@ -101,6 +101,8 @@ apt install php7.4
 apt install php7.4-opcache
 apt install php7.4-mysql
 apt install php7.4-json
+apt install php7.4-xml
+apt install php7.4-intl
 apt install php-imagick
 apt install php-gearman
 
