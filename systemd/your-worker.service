@@ -1,0 +1,15 @@
+[Unit]
+Description=Your custom application worker
+Requires=mysql.service
+
+[Service]
+User=www-data
+Group=www-data
+PIDFile=/var/run/your-worker.pid
+ExecStart=/usr/bin/php /var/www/workers/your-worker.php > /dev/null 2>/dev/null
+Type=Simple
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
