@@ -108,6 +108,11 @@ apt install php-gearman
 
 # composer for php dep management
 apt install composer
+
+# for node + npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+nvm install v14
+npm install -g npm@latest
 ```
 
 ### Configure NGINX
